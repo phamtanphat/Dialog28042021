@@ -13,6 +13,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     Button mBtnAlertDialog;
+    int mIndex = -1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,30 +25,32 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setTitle("Ứng dụng có phiên bản mới");
-                builder.setMessage("Bạn có muốn nâng cấp ứng dụng hay không?");
+                builder.setTitle("Chọn món ăn chính");
+
                 builder.setIcon(R.mipmap.ic_launcher);
+                builder.setCancelable(false);
 
-                builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                // Single choice
+                String[] foodNames = {"Mỳ ý", "Pizza", "Gà rán", "Thịt nướng"};
+
+                builder.setSingleChoiceItems(foodNames, -1, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast.makeText(MainActivity.this, "Bắt đầu cập nhật", Toast.LENGTH_SHORT).show();
+                        mIndex = i;
+                    }
+                });
+                builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if (mIndex == -1){
+                            Toast.makeText(MainActivity.this, "Người dùng chưa chọn món", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(MainActivity.this, "Bạn chọn " + foodNames[mIndex], Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
 
-                builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast.makeText(MainActivity.this, "Không cập nhật", Toast.LENGTH_SHORT).show();
-                    }
-                });
 
-                builder.setNeutralButton("Hủy", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast.makeText(MainActivity.this, "Chưa xác định", Toast.LENGTH_SHORT).show();
-                    }
-                });
                 builder.show();
             }
         });
