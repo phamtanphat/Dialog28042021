@@ -36,13 +36,13 @@
                 <EditText
                     android:layout_marginTop="20dp"
                     android:id="@+id/editTextUserName"
-                    android:text="User name"
+                    android:hint="User name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
                 <EditText
                     android:layout_marginTop="20dp"
                     android:id="@+id/editTextPassword"
-                    android:text="Password"
+                    android:hint="Password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
                 <LinearLayout
@@ -53,11 +53,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <Button
+                        android:id="@+id/buttonCancel"
                         android:layout_marginRight="100dp"
                         android:text="Cancel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                     <Button
+                        android:id="@+id/buttonLogin"
                         android:text="Login"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>

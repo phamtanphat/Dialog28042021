@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -82,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
                 Dialog dialog = new Dialog(MainActivity.this);
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.setContentView(R.layout.layout_dialog_login);
+                dialog.setCancelable(false);
 
                 Window window = dialog.getWindow();
                 if (window == null){
@@ -95,6 +97,34 @@ public class MainActivity extends AppCompatActivity {
                 WindowManager.LayoutParams layoutParams = window.getAttributes();
                 layoutParams.gravity = Gravity.CENTER;
                 window.setAttributes(layoutParams);
+
+                EditText edtUser = dialog.findViewById(R.id.editTextUserName);
+                EditText edtPassword = dialog.findViewById(R.id.editTextPassword);
+                Button btnCancel = dialog.findViewById(R.id.buttonCancel);
+                Button btnLogin = dialog.findViewById(R.id.buttonLogin);
+
+                btnCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(MainActivity.this, "Hủy bỏ đăng nhập", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                });
+
+                btnLogin.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String userName = edtUser.getText().toString();
+                        String password = edtPassword.getText().toString();
+
+                        if (userName.equals("phat123") && password.equals("1234456")){
+                            Toast.makeText(MainActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        }else{
+                            Toast.makeText(MainActivity.this, "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
 
                 dialog.show();
             }
